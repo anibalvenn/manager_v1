@@ -1,3 +1,17 @@
+This application serves to manage Skat (a card game) tournaments. It can also be used for managing other similar card game tournaments.
+
+It is not a 100% autonomous application, as it requires some CSV file reader and editor to function correctly.
+
+The "Start Championship" button creates a directory for the new championship. To create a new championship, the user must determine the tournament's name. The created directory will have the same name as the tournament.
+
+Additionally, the user must determine the number of random and ranked series when creating the tournament. The random series, predefined by the table algorithm, establishes "blinds" to complete a multiple of 4 for the creation of tables. Players are divided into 4 groups of equal quantity (if it's not a multiple of 4, blinds are added) according to the order they are inserted into the players.csv list, from where the system will pull the data to assemble the random series.
+
+Thus, assuming a tournament of 40 players, group 1 will gather players from player_id 1 to 10, group 2 from 11 to 20, 21-30, 31-40. Players from the same group will not face each other at the same table, so the organizer must pay attention to the quartiles of the list. There cannot be players with the same player_id in the players.csv list.
+
+The "Add Results to Ranking" button opens the file browser and assumes that the user will choose a series to add their results to the ranking.csv document contained in the same directory. The program will select the player_id of each line, the points, and lost games and send them to the ranking.csv spreadsheet.
+
+The "New Ranked List" button creates a ranked list from the general ranking or a specific list. The user simply chooses the .csv file from which they want to create the ranked list. If it is from a ranking.csv, it will pull from the "total" column; if it is from a series, it will pull from the "points" column.
+
 Esse aplicativo tem a função de gerir torneios de Skat (jogo de baralho)
 Eventualmente, também pode ser usado para gestão de outros torneios de jogos de carta similares.
 
