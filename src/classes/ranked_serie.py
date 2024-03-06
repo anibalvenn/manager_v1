@@ -42,20 +42,24 @@ class RankedSerie:
       player_id_index = header.index("player_id")  # Find the index of the 'player_id' column
       data = list(reader)
 
+
     # Sorting the data by the 'total' column in descending order
     sorted_data = sorted(data, key=lambda x: int(x[total_index]), reverse=True)
 
     # Extracting player_id values from sorted data
     sorted_player_ids = [row[player_id_index] for row in sorted_data]
 
-    return sorted_player_ids
+    # Filter out negative values
+    sorted_player_ids_no_blinds = [id for id in sorted_player_ids if int(id) >= 0]
+
+    return sorted_player_ids_no_blinds
 
 
   def ranked_tables_by_groups_of_player_id(self,player_ids):
     slice_size = 4
     remainder = len(player_ids) % slice_size
     amount_three_pl_tische = 4 - remainder if remainder != 0 else 0
-
+    print(player_ids)
     # If remainder is 0, all tables will have 4 players
     if remainder == 0:
       ranked_tables = [player_ids[i:i + slice_size] for i in range(0, len(player_ids), slice_size)]
